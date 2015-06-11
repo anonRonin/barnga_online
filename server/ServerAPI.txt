@@ -1,0 +1,82 @@
+Server API
+==========
+Version: 1.2.1
+
+Container Classes
+-----------------
+Player
+    id     : int
+    teamId : int
+	coord  : Coordinates
+
+Food
+    id    : int
+    team  : int
+	coord : Coordinates
+
+Points
+	total   : int
+	earners : HashMap<Player, int>
+
+Coordinates
+    x : int
+    y : int
+
+MessagePlayerCoord
+    player    : Player
+    new_coord : Coordinates
+
+MessageFoodCoord
+    food      : Food
+    new_coord : Coordinates
+	gone      : boolean
+
+MessagePlayerName
+    playerName : String
+    teamId     : int
+
+MessagePointsUpdate
+    player   : Player
+    newPoint : int
+
+
+Events FROM server
+------------------
+* connect
+* disconnect
+* gameStart
+
+# The identity of the player. This includes the starting ID, team ID, and the
+# starting coordinates of the player who received this event.
+* playerId
+    - Player
+
+# Whenever somebody (including yourself) moved. The new coordinate of that
+# user is stored in MessagePlayerCoord.new_coord
+* playerUpdate
+    - MessagePlayerCoord
+
+# Whenever there's a change in food coordinate, that information is sent from
+# the server. When `gone' is true, somebody took that food. If false, then
+# there is a new food that appeared on the field at location
+# MessageFoodCoord.new_coord
+* foodUpdate
+    - MessageFoodCoord
+
+Optional (not necessary for prototype)
+# The updated point of the player. (Team can be accessed via player.teamId)
+# TODO: The data type sent may change
+* pointUpdate
+    - MessagePointsUpdate
+
+
+Events TO server
+----------------
+* connect
+    - MessagePlayerName
+* disconnect
+* move
+    - MessagePlayerCoord
+
+Optional
+* teamSelected

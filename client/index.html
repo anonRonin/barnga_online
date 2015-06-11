@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>netty-socketio Test page</title>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/3.0.2/normalize.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="style.css" type="text/css" charset="utf-8">
+  </head>
+
+  <body>
+    <ul class="move_buttons">
+      <li><button id="up" onclick="move_up()">Up</button></li>
+      <li><button id="down" onclick="move_down()">Down</button></li>
+      <li><button id="left" onclick="move_left()">Left</button></li>
+      <li><button id="right" onclick="move_right()">Right</button></li>
+    </ul>
+
+    <section id="current_team"></section>
+
+    <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <script src="client.js"></script>
+  </body>
+</html>
