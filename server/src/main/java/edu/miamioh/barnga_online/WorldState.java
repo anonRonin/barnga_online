@@ -1,6 +1,9 @@
 package edu.miamioh.barnga_online;
 
+import java.net.SocketAddress;
 import java.util.HashMap;
+
+import com.corundumstudio.socketio.SocketIOClient;
 
 public class WorldState {
     /* teamId => Team, which is a HashSet of Player */
@@ -14,6 +17,9 @@ public class WorldState {
     /* Size of the field viewable to the players on the client side */
     protected int viewSizeX, viewSizeY;
 
+    /* Associates SocketIOClient to Player */
+    protected HashMap<SocketAddress, Player> clients;
+
     protected boolean gameStarted;
     private int maxId = 0;
 
@@ -24,6 +30,7 @@ public class WorldState {
         teams = new HashMap<Integer, Team<Player>>();
         foods = new HashMap<Integer, Food>();
         points = new HashMap<Integer, Points>();
+        clients = new HashMap<SocketAddress, Player>();
         gameStarted = false;
     }
 
@@ -103,6 +110,12 @@ public class WorldState {
 
         Team<Player> playerTeam = teams.get(teamId);
         playerTeam.add(player);
+    }
+
+    public void addPlayer(Player player, int teamId,
+            SocketIOClient client) {
+        addPlayer(player, teamId);
+        clients.put(client.getRemoteAddress(), player);
     }
 
     /**
@@ -252,5 +265,9 @@ public class WorldState {
      */
     public boolean isGameStarted() {
         return gameStarted;
+    }
+
+    public HashMap<SocketAddress, Player> getClients() {
+        return clients;
     }
 }

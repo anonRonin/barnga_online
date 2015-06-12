@@ -31,7 +31,7 @@ public class ConnectEventListener implements ConnectListener {
         Coordinates coord = configs.initialCoordinates(playerId, teamId);
 
         Player p = new Player(playerId, teamId, coord);
-        world.addPlayer(p, teamId);
+        world.addPlayer(p, teamId, client);
 
         // Add to room (for broadcasting)
         SocketIONamespace team = server.getNamespace(Integer.toString(teamId));

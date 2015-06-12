@@ -6,7 +6,9 @@ import com.corundumstudio.socketio.Configuration;
 import com.corundumstudio.socketio.SocketIOServer;
 
 import edu.miamioh.barnga_online.events.MessagePlayerCoord;
-import edu.miamioh.barnga_online.listeners.*;
+import edu.miamioh.barnga_online.listeners.ConnectEventListener;
+import edu.miamioh.barnga_online.listeners.DisconnectEventListener;
+import edu.miamioh.barnga_online.listeners.MoveListener;
 
 /**
  * Framework for a browser game that's similar to the game barnga.

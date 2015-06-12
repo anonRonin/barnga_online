@@ -27,7 +27,8 @@ public class DisconnectEventListener implements DisconnectListener {
 
     @Override
     public void onDisconnect(SocketIOClient client) {
-        Util.debug("A client has disconnected");
-        // TODO: Inform other players about the disconnect
+        Player p = world.getClients().get(client.getRemoteAddress());
+        Util.debug("Player %d of Team %d has disconnected\n", p.id, p.teamId);
+        // TODO: Inform other players about the disconnect?
     }
 }

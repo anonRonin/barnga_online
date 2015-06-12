@@ -45,6 +45,7 @@ public class Team<Player> extends HashSet<Player> {
             return false;
         }
 
+        @SuppressWarnings("unchecked")
         Team<Player> other = (Team<Player>)obj;
         return this.teamId == other.teamId;
     }
