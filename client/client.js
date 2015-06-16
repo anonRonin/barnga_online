@@ -57,38 +57,33 @@ socket.on('foodUpdate', function (data) {
             data.food.id, data.food.team, data);
 });
 
-function move_up() {
-    var currentCoord = me.coord;
-    var mes = {
-        player: me,
-        newCoord: {x: currentCoord.x, y: currentCoord.y - 1},
-    };
-    socket.emit('move', mes);
-}
+function move(dir) {
+    if (!gameStarted) {
+        console.log('Game has not started yet!');
+        return;
+    }
 
-function move_down() {
     var currentCoord = me.coord;
-    var mes = {
-        player: me,
-        newCoord: {x: currentCoord.x, y: currentCoord.y + 1},
-    };
-    socket.emit('move', mes);
-}
 
-function move_left() {
-    var currentCoord = me.coord;
-    var mes = {
-        player: me,
-        newCoord: {x: currentCoord.x - 1, y: currentCoord.y},
-    };
-    socket.emit('move', mes);
-}
+    var newCoord;
+    switch (dir) {
+        case 'up':
+            newCoord = {x: currentCoord.x, y: currentCoord.y - 1};
+            break;
+        case 'down':
+            newCoord = {x: currentCoord.x, y: currentCoord.y + 1};
+            break;
+        case 'left':
+            newCoord = {x: currentCoord.x - 1, y: currentCoord.y};
+            break;
+        case 'right':
+            newCoord = {x: currentCoord.x + 1, y: currentCoord.y};
+            break;
+    }
 
-function move_right() {
-    var currentCoord = me.coord;
     var mes = {
         player: me,
-        newCoord: {x: currentCoord.x + 1, y: currentCoord.y},
+        newCoord: newCoord,
     };
     socket.emit('move', mes);
 }
