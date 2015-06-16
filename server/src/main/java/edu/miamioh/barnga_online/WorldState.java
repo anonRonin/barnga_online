@@ -20,6 +20,8 @@ public class WorldState {
     /* Associates SocketIOClient to Player */
     protected HashMap<SocketAddress, Player> clients;
 
+    protected BarngaOnlineConfigsDefault configs;
+
     protected boolean gameStarted;
     private int maxId = 0;
 
@@ -105,7 +107,7 @@ public class WorldState {
      */
     public void addPlayer(Player player, int teamId) {
         if (!teams.containsKey(teamId)) {
-            teams.put(teamId, new Team<Player>(teamId));
+            teams.put(teamId, new Team<Player>(teamId, player.getConfigs()));
         }
 
         Team<Player> playerTeam = teams.get(teamId);

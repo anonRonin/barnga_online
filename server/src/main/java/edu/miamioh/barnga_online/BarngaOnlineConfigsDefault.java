@@ -83,7 +83,7 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
                 int x = (int)(Math.random() * WORLD_X);
                 int y = (int)(Math.random() * WORLD_Y);
                 Coordinates coord = new Coordinates(x, y);
-                Food food = new Food(foodCounter, i, coord);
+                Food food = new Food(foodCounter, i, coord, this);
 
                 world.addFood(food);
                 Util.debug("Generated food at %s\n", food.coord.toString());
@@ -163,37 +163,7 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
             return false;
         }
 
-        // Eatable if visible
-        Util util = new Util(world, this);
-        return util.foodVisible(player, food);
-    }
-
-    @Override
-    public HashSet<Team<Player>> foodVisibleTeams(Food food) {
-        HashSet<Team<Player>> ret = new HashSet<Team<Player>>();
-
-        for (int i = 0; i < foodVisibility.length; i++) {
-            // Can see food (but may not appear as that team's food)
-            if (foodVisibility[i][food.team] != INVISIBLE) {
-                ret.add(world.getTeam(i));
-            }
-        }
-
-        return ret;
-    }
-
-    @Override
-    public HashSet<Team<Player>> playerVisibleTeams(Player player) {
-        HashSet<Team<Player>> ret = new HashSet<Team<Player>>();
-
-        for (int i = 0; i < playerVisibility.length; i++) {
-            // Can see team (but may not appear as that team)
-            if (playerVisibility[i][player.teamId] != INVISIBLE) {
-                ret.add(world.getTeam(i));
-            }
-        }
-
-        return ret;
+        return player.canSee(food);
     }
 
     public int[][] getPlayerVisibility() {
@@ -202,5 +172,9 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
 
     public int[][] getFoodVisibility() {
         return foodVisibility;
+    }
+
+    public WorldState getWorld() {
+        return world;
     }
 }

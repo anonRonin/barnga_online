@@ -33,7 +33,7 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
     @Override
     public void onData(SocketIOClient client, MessagePlayerCoord message,
             AckRequest req) {
-        Player player = message.player;
+        Player player = new Player(message.player, (BarngaOnlineConfigsDefault)configs);
         Coordinates newCoord = message.newCoord;
 
         Util.debug("Request from Player ID %d of Team %d from %s to %s\n",
@@ -68,11 +68,10 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
         }
 
         // Broadcast to team
-        Util util = new Util(world, (BarngaOnlineConfigsDefault)configs);
-        for (Team<Player> t : configs.playerVisibleTeams(player)) {
+        for (Team<Player> t : player.seenBy()) {
             // Create fake player (potentially with incorrect team information)
             Player fakePlayer = new Player(player);
-            fakePlayer.teamId = util.playerVisibleAs(t, player);
+            fakePlayer.teamId = fakePlayer.appearsTo(t);
             MessagePlayerCoord mes = new MessagePlayerCoord(fakePlayer, newCoord);
 
             // Broadcast to one team
@@ -134,12 +133,10 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
      * @param gone whether the food is gone from the world or not
      */
     private void broadcastFood(Food food, boolean gone) {
-        Util util = new Util(world, (BarngaOnlineConfigsDefault)configs);
-
-        for (Team<Player> t : configs.foodVisibleTeams(food)) {
+        for (Team<Player> t : food.seenBy()) {
             // Make fake Food where belonging team is modified
             Food fakeFood = new Food(food);
-            fakeFood.team = util.foodVisibleAs(t, food);
+            fakeFood.team = food.appearsTo(t);
             MessageFoodCoord mes = new MessageFoodCoord(fakeFood, fakeFood.coord, gone);
 
             // Broadcast to one team

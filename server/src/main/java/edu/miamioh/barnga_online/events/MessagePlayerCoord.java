@@ -9,14 +9,14 @@ import edu.miamioh.barnga_online.Coordinates;
  * @author Naoki Mizuno
  */
 public class MessagePlayerCoord {
-    public Player player;
+    public MessagePlayerId player;
     public Coordinates newCoord;
 
     public MessagePlayerCoord() {
     }
 
     public MessagePlayerCoord(Player player, Coordinates newCoord) {
-        this.player = player;
+        this.player = new MessagePlayerId(player);
         this.newCoord = newCoord;
     }
 }

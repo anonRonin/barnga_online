@@ -30,7 +30,8 @@ public class ConnectEventListener implements ConnectListener {
         int teamId = configs.assignTeam(playerId);
         Coordinates coord = configs.initialCoordinates(playerId, teamId);
 
-        Player p = new Player(playerId, teamId, coord);
+        Player p = new Player(playerId, teamId, coord,
+                (BarngaOnlineConfigsDefault)configs);
         world.addPlayer(p, teamId, client);
 
         // Add to room (for broadcasting)
@@ -44,14 +45,13 @@ public class ConnectEventListener implements ConnectListener {
         Util.debug("Player ID %d connected at %s\n", playerId, coord);
 
         // Send player's identity
-        client.sendEvent(Constants.EVENT_PLAYER_ID, p);
+        client.sendEvent(Constants.EVENT_PLAYER_ID, new MessagePlayerId(p));
 
         // Send visible food information
-        Util util = new Util(world, (BarngaOnlineConfigsDefault)configs);
         for (Food f : world.getFoods().values()) {
-            if (util.foodVisible(teamId, f)) {
+            if (p.canSee(f)) {
                 Food fakeFood = new Food(f);
-                fakeFood.team = util.foodVisibleAs(teamId, f);
+                fakeFood.team = f.appearsTo(p);
 
                 MessageFoodCoord mes =
                     new MessageFoodCoord(fakeFood, f.coord, false);
@@ -59,11 +59,12 @@ public class ConnectEventListener implements ConnectListener {
             }
         }
 
+        Util util = new Util(world, (BarngaOnlineConfigsDefault)configs);
         // Broadcast about existing players to new player
         for (Team<Player> t : world.getTeams().values()) {
             for (Player otherPlayer : t) {
                 // If the new player can't see the existing player
-                if (!util.playerVisible(p, otherPlayer)) {
+                if (!p.canSee(otherPlayer)) {
                     continue;
                 }
 
@@ -75,11 +76,11 @@ public class ConnectEventListener implements ConnectListener {
                 client.sendEvent(Constants.EVENT_PLAYER_UPDATE, mes);
             }
         }
+        Util.debug("Sent to %d about existing players\n", playerId);
 
         // Send message to currently existing teams
         for (Team<Player> t : world.getTeams().values()) {
-            // Team can't see the new player
-            if (!util.playerVisible(t, p)) {
+            if (!t.canSee(p)) {
                 continue;
             }
 
@@ -88,10 +89,13 @@ public class ConnectEventListener implements ConnectListener {
             String roomName = Integer.toString(t.getTeamId());
             BroadcastOperations room = server.getRoomOperations(roomName);
             room.sendEvent(Constants.EVENT_PLAYER_UPDATE, mes);
+
+            Util.debug("Sent to %d about the new player %d\n", t.getTeamId(), playerId);
         }
 
         if (!world.isGameStarted() && configs.gameStarts()) {
             server.getBroadcastOperations().sendEvent(Constants.EVENT_GAME_START);
+            Util.debug("Game has started!");
         }
     }
 }
