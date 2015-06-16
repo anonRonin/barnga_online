@@ -1,6 +1,6 @@
 Server API
 ==========
-Version: 1.2.2
+Version: 1.3.0
 
 Container Classes
 -----------------
@@ -49,6 +49,7 @@ Events FROM server
 ------------------
 * connect
 * disconnect
+    - MessagePlayerId
 * gameStart
 
 # The identity of the player. This includes the starting ID, team ID, and the
