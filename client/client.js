@@ -1,6 +1,7 @@
 var socket = io.connect('http://localhost:3000');
 /* Dummy data. Will get updated on receiving playerId event */
 var me = {id: 42, teamId: 42, coord: {x: 42, y: 42}};
+var gameStarted = false;
 
 socket.on('connect', function () {
     console.log('Connected to Server');
@@ -27,6 +28,7 @@ socket.on('disconnect', function (mes) {
 
 socket.on('gameStart', function () {
     console.log('Game has started');
+    gameStarted = true;
 });
 
 socket.on('playerUpdate', function (data) {
