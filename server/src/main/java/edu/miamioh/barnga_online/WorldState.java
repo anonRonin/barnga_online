@@ -139,6 +139,14 @@ public class WorldState {
     public void removePlayer(Player player) {
         int teamId = player.teamId;
         teams.get(teamId).remove(player);
+
+        // Find the corresponding SocketAddress of this player
+        for (SocketAddress addr : getClients().keySet()) {
+            if (getClients().get(addr).equals(player)) {
+                getClients().remove(addr);
+                break;
+            }
+        }
     }
 
     /**

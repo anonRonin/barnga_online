@@ -111,6 +111,7 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
 
     @Override
     public boolean gameStarts() {
+        Util.debug("We have %d players\n", world.getPlayers().size());
         return world.getPlayers().size() >= 4;
     }
 
