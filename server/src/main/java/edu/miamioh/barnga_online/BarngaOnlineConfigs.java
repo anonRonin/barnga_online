@@ -6,8 +6,6 @@ import java.util.HashSet;
  * Interface that defines the callback methods and initialization methods that
  * are needed for the game.
  *
- * TODO: Better method names
- *
  * @author Naoki Mizuno
  */
 public interface BarngaOnlineConfigs {
