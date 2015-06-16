@@ -29,6 +29,20 @@ public class DisconnectEventListener implements DisconnectListener {
     public void onDisconnect(SocketIOClient client) {
         Player p = world.getClients().get(client.getRemoteAddress());
         Util.debug("Player %d of Team %d has disconnected\n", p.id, p.teamId);
-        // TODO: Inform other players about the disconnect?
+
+        // Inform other players about the disconnect
+        for (Team<Player> t : world.getTeams().values()) {
+            if (!t.canSee(p)) {
+                continue;
+            }
+
+            MessagePlayerId mes = new MessagePlayerId(p);
+            // Fake team ID just in case
+            mes.teamId = p.appearsTo(t);
+
+            String roomName = Integer.toString(t.getTeamId());
+            BroadcastOperations room = server.getRoomOperations(roomName);
+            room.sendEvent(Constants.EVENT_DISCONNECT, mes);
+        }
     }
 }

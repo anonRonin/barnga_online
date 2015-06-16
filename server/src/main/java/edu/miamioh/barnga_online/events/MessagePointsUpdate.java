@@ -10,6 +10,14 @@ import edu.miamioh.barnga_online.Player;
  * @author Naoki Mizuno
  */
 public class MessagePointsUpdate {
-    public Player player;
+    public MessagePlayerId player;
     public int newPoint;
+
+    public MessagePointsUpdate() {
+    }
+
+    public MessagePointsUpdate(Player player, int newPoint) {
+        this.player = new MessagePlayerId(player);
+        this.newPoint = newPoint;
+    }
 }

@@ -1,6 +1,6 @@
 Server API
 ==========
-Version: 1.2.1
+Version: 1.3.0
 
 Container Classes
 -----------------
@@ -22,8 +22,13 @@ Coordinates
     x : int
     y : int
 
+MessagePlayerId
+    id     : int
+    teamId : int
+    coord  : Coordinates
+
 MessagePlayerCoord
-    player    : Player
+    player    : MessagePlayerId
     new_coord : Coordinates
 
 MessageFoodCoord
@@ -36,7 +41,7 @@ MessagePlayerName
     teamId     : int
 
 MessagePointsUpdate
-    player   : Player
+    player   : MessagePlayerId
     newPoint : int
 
 
@@ -44,12 +49,13 @@ Events FROM server
 ------------------
 * connect
 * disconnect
+    - MessagePlayerId
 * gameStart
 
 # The identity of the player. This includes the starting ID, team ID, and the
 # starting coordinates of the player who received this event.
 * playerId
-    - Player
+    - MessagePlayerId
 
 # Whenever somebody (including yourself) moved. The new coordinate of that
 # user is stored in MessagePlayerCoord.new_coord

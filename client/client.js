@@ -21,8 +21,8 @@ socket.on('playerId', function (data) {
     document.getElementById('current_team').appendChild(textnode);
 });
 
-socket.on('disconnect', function () {
-    console.log('Disconnected from server');
+socket.on('disconnect', function (mes) {
+    console.log("Player %d of Team %d has disconnect\n", mes.id, mes.teamId);
 });
 
 socket.on('gameStart', function () {

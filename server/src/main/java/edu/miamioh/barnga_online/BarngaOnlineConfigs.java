@@ -6,8 +6,6 @@ import java.util.HashSet;
  * Interface that defines the callback methods and initialization methods that
  * are needed for the game.
  *
- * TODO: Better method names
- *
  * @author Naoki Mizuno
  */
 public interface BarngaOnlineConfigs {
@@ -104,22 +102,4 @@ public interface BarngaOnlineConfigs {
      * Determine whether a player can eat a food.
      */
     public boolean foodEatable(Player player, Food food);
-
-    /**
-     * Returns the set of teams that can see the given food.
-     *
-     * @param food the food to be checked
-     *
-     * @return a set of teams that can see the given food
-     */
-    public HashSet<Team<Player>> foodVisibleTeams(Food food);
-
-    /**
-     * Returns the set of teams that can see the given player.
-     *
-     * @param player the player to be checked
-     *
-     * @return a set of teams that can see the given player
-     */
-    public HashSet<Team<Player>> playerVisibleTeams(Player player);
 }
