@@ -118,7 +118,8 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     @Override
     public boolean gameEnds() {
         // Finish game when all foods are taken
-        return world.getFoods().size() == 0;
+        return world.getFoods().size() == 0
+            || world.getPlayers().size() < TEAM_NUMBER;
     }
 
     @Override

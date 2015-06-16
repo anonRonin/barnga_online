@@ -277,6 +277,10 @@ public class WorldState {
         return gameStarted;
     }
 
+    public void setGameStarted(boolean gameStarted) {
+        this.gameStarted = gameStarted;
+    }
+
     public HashMap<SocketAddress, Player> getClients() {
         return clients;
     }

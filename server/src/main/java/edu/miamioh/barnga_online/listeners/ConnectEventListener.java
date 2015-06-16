@@ -93,8 +93,12 @@ public class ConnectEventListener implements ConnectListener {
             Util.debug("Sent to %d about the new player %d\n", t.getTeamId(), playerId);
         }
 
-        if (!world.isGameStarted() && configs.gameStarts()) {
+        if (world.isGameStarted()) {
+            client.sendEvent(Constants.EVENT_GAME_START);
+        }
+        else if (!world.isGameStarted() && configs.gameStarts()) {
             server.getBroadcastOperations().sendEvent(Constants.EVENT_GAME_START);
+            world.setGameStarted(true);
             Util.debug("Game has started!");
         }
     }
