@@ -8,14 +8,14 @@ import java.util.HashSet;
  * @author Naoki Mizuno
  */
 public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
-    public static final int WORLD_X = 30;
-    public static final int WORLD_Y = 30;
-    public static final int VIEW_X = 30;
-    public static final int VIEW_Y = 30;
-    /* public static final int WORLD_X = 3000; */
-    /* public static final int WORLD_Y = 3000; */
-    /* public static final int VIEW_X = 3000; */
-    /* public static final int VIEW_Y = 3000; */
+    /* public static final int WORLD_X = 30; */
+    /* public static final int WORLD_Y = 30; */
+    /* public static final int VIEW_X = 30; */
+    /* public static final int VIEW_Y = 30; */
+    public static final int WORLD_X = 3000;
+    public static final int WORLD_Y = 3000;
+    public static final int VIEW_X = 3000;
+    public static final int VIEW_Y = 3000;
     /* How many points a player gets when eating a food */
     public static final int FOOD_COLLECT_POINTS = 1;
     /* Used when assigning team */
