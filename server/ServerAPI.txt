@@ -7,16 +7,16 @@ Container Classes
 Player
     id     : int
     teamId : int
-	coord  : Coordinates
+    coord  : Coordinates
 
 Food
     id    : int
     team  : int
-	coord : Coordinates
+    coord : Coordinates
 
 Points
-	total   : int
-	earners : HashMap<Player, int>
+    total   : int
+    earners : HashMap<Player, int>
 
 Coordinates
     x : int
@@ -34,7 +34,7 @@ MessagePlayerCoord
 MessageFoodCoord
     food      : Food
     newCoord : Coordinates
-	gone      : boolean
+    gone      : boolean
 
 MessagePlayerName
     playerName : String
