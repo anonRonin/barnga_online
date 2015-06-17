@@ -29,11 +29,11 @@ MessagePlayerId
 
 MessagePlayerCoord
     player    : MessagePlayerId
-    new_coord : Coordinates
+    newCoord : Coordinates
 
 MessageFoodCoord
     food      : Food
-    new_coord : Coordinates
+    newCoord : Coordinates
 	gone      : boolean
 
 MessagePlayerName
@@ -58,14 +58,14 @@ Events FROM server
     - MessagePlayerId
 
 # Whenever somebody (including yourself) moved. The new coordinate of that
-# user is stored in MessagePlayerCoord.new_coord
+# user is stored in MessagePlayerCoord.newCoord
 * playerUpdate
     - MessagePlayerCoord
 
 # Whenever there's a change in food coordinate, that information is sent from
 # the server. When `gone' is true, somebody took that food. If false, then
 # there is a new food that appeared on the field at location
-# MessageFoodCoord.new_coord
+# MessageFoodCoord.newCoord
 * foodUpdate
     - MessageFoodCoord
 
