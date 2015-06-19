@@ -95,11 +95,27 @@ public interface BarngaOnlineConfigs {
 
     /**
      * Callback method when receiving request for moving coordinates.
+     *
+     * Typically, this method should check whether the coordinates are within
+     * the world boundaries and whether there is some other player already
+     * at the coordinates.
+     *
+     * @param player the player who is trying to move
+     *
+     * @param newCoord the coordinates to which the player is trying to move
+     *
+     * @return true if player can move to the coordinates
      */
     public boolean playerMovable(Player player, Coordinates newCoord);
 
     /**
-     * Determine whether a player can eat a food.
+     * Determine whether a player can see a food.
+     *
+     * @param player
+     *
+     * @param food
+     *
+     * @return true if player can see the food, false if not
      */
-    public boolean foodEatable(Player player, Food food);
+    public boolean foodVisible(Player player, Food food);
 }

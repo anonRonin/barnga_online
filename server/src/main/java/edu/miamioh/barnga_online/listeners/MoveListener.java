@@ -80,8 +80,6 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
             team.sendEvent(Constants.EVENT_PLAYER_UPDATE, mes);
         }
 
-        Util.debug("Sent to all relevant teams about coordinate change");
-
         // Update the player's coordinate
         player.coord = newCoord;
     }

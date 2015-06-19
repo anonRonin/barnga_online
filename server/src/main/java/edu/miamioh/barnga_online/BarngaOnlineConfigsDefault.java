@@ -17,6 +17,7 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     /* Used when assigning team */
     public static final int TEAM_NUMBER = 4;
     public static final int FOOD_PER_TEAM = 10;
+
     private int playerCounter = 0;
 
     protected WorldState world;
@@ -62,6 +63,7 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
 
         // Place food on world
         int foodCounter = 0;
+        Util.debug("Here's a list of generated food");
         for (int i = 0; i < TEAM_NUMBER; i++) {
             for (int j = 0; j < FOOD_PER_TEAM; j++) {
                 int x = (int)(Math.random() * WORLD_X);
@@ -70,11 +72,12 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
                 Food food = new Food(foodCounter, i, coord, this);
 
                 world.addFood(food);
-                Util.debug("Generated food at %s\n", food.coord.toString());
+                Util.debug("%s ", food.coord.toString());
 
                 foodCounter++;
             }
         }
+        Util.debug("\n");
     }
 
     /**
@@ -144,7 +147,7 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
     }
 
     @Override
-    public boolean foodEatable(Player player, Food food) {
+    public boolean foodVisible(Player player, Food food) {
         if (player == null || food == null) {
             return false;
         }
