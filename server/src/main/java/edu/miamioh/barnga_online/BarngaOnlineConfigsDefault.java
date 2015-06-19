@@ -8,10 +8,6 @@ import java.util.HashSet;
  * @author Naoki Mizuno
  */
 public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
-    /* public static final int WORLD_X = 30; */
-    /* public static final int WORLD_Y = 30; */
-    /* public static final int VIEW_X = 30; */
-    /* public static final int VIEW_Y = 30; */
     public static final int WORLD_X = 3000;
     public static final int WORLD_Y = 3000;
     public static final int VIEW_X = 3000;
@@ -46,35 +42,23 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
         world.setViewSizeX(VIEW_X);
         world.setViewSizeY(VIEW_Y);
 
-        /* Visibility table */
-        if (TEAM_NUMBER != 4) {
-            // Everything is visible
-            for (int i = 0; i < TEAM_NUMBER; i++) {
-                for (int j = 0; j < TEAM_NUMBER; j++) {
-                    playerVisibility[i][j] = j;
-                    foodVisibility[i][j] = j;
-                }
-            }
-        }
-        else {
-            /* Player visibility */
-            int[][] playerVisibilityCopy = {
-                {0, I, I, I},   // Team 0: Doesn't see any other team
-                {2, 1, 3, 0},   // Team 1: Sees different from actual
-                {0, 1, 2, 3},   // Team 2: Sees all other teams
-                {I, 1, I, 3},   // Team 3: Only sees some teams
-            };
-            playerVisibility = playerVisibilityCopy;
+        /* Player visibility */
+        int[][] playerVisibilityCopy = {
+            {0, I, I, I},   // Team 0: Doesn't see any other team
+            {2, 1, 3, 0},   // Team 1: Sees different from actual
+            {0, 1, 2, 3},   // Team 2: Sees all other teams
+            {I, 1, I, 3},   // Team 3: Only sees some teams
+        };
+        playerVisibility = playerVisibilityCopy;
 
-            /* Food visibility */
-            int[][] foodVisibilityCopy = {
-                {0, I, 2, I},   // Team 0: Sees some of other teams' food
-                {I, 1, I, I},   // Team 1: All food of their own
-                {0, 1, 2, 3},   // Team 2: Sees food for all other teams
-                {3, 3, 3, 3},   // Team 3: Everything looks the same
-            };
-            foodVisibility = foodVisibilityCopy;
-        }
+        /* Food visibility */
+        int[][] foodVisibilityCopy = {
+            {0, I, 2, I},   // Team 0: Sees some of other teams' food
+            {I, 1, I, I},   // Team 1: All food of their own
+            {0, 1, 2, 3},   // Team 2: Sees food for all other teams
+            {3, 3, 3, 3},   // Team 3: Everything looks the same
+        };
+        foodVisibility = foodVisibilityCopy;
 
         // Place food on world
         int foodCounter = 0;
