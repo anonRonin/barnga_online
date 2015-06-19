@@ -142,8 +142,9 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
 
         boolean outOfBounds = newCoord.x >= WORLD_X || newCoord.x < 0
             || newCoord.y >= WORLD_Y || newCoord.y < 0;
-        boolean someoneThere = world.playerAt(newCoord) != null;
-        return !outOfBounds && !someoneThere;
+        boolean someoneAround =
+            world.visiblePlayerNear(player, Player.VALID_RANGE) != null;
+        return !outOfBounds && !someoneAround;
     }
 
     @Override

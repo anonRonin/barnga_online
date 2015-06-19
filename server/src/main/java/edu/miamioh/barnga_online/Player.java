@@ -10,6 +10,9 @@ import edu.miamioh.barnga_online.events.MessagePlayerId;
  * @author Naoki Mizuno
  */
 public class Player {
+    /* Accepted distance from food for eating in pixels */
+    public static final int VALID_RANGE = 20;
+
     /* Hash code of the MessagePlayerName#playerName */
     public int id;
     public int teamId;
@@ -63,6 +66,11 @@ public class Player {
         Team<Player> targetTeam = configs.getWorld().getTeam(teamId);
         return food.seenBy().contains(targetTeam);
     }
+
+	public boolean canEat(Food food) {
+		double distance = Util.distance(food.coord, coord);
+		return canSee(food) && distance <= VALID_RANGE;
+	}
 
     public int appearsTo(Player player) {
         return appearsTo(player.teamId);
@@ -120,4 +128,14 @@ public class Player {
     public BarngaOnlineConfigsDefault getConfigs() {
         return configs;
     }
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || !(obj instanceof Player)) {
+			return false;
+		}
+
+		Player other = (Player)obj;
+		return this.id == other.id;
+	}
 }

@@ -39,6 +39,13 @@ public class Util {
         }
     }
 
+    public static double distance(Coordinates a, Coordinates b) {
+		int x_diff = Math.abs(a.x - b.x);
+		int y_diff = Math.abs(a.y - b.y);
+
+		return Math.sqrt(Math.pow(x_diff, 2) + Math.pow(y_diff, 2));
+    }
+
     public Util(WorldState world, BarngaOnlineConfigsDefault configs) {
         this.world = world;
         this.configs = configs;

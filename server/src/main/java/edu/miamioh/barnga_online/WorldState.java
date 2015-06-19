@@ -1,6 +1,7 @@
 package edu.miamioh.barnga_online;
 
 import java.net.SocketAddress;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.corundumstudio.socketio.SocketIOClient;
@@ -243,6 +244,55 @@ public class WorldState {
     }
 
     /**
+     * Returns a visible player near the given player.
+     *
+     * The returned player is NOT necessarily the closest player.
+     *
+     * @param player the player
+     *
+     * @param validDistance what's considered "near"
+     *
+     * @return one of the players that are near the given player. Returns null
+     *         if no player is around.
+     */
+    public Player visiblePlayerNear(Player player, double validDistance) {
+        for (Player p : playersNear(player.coord, validDistance)) {
+            if (!player.equals(p) && player.canSee(p)) {
+                return p;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Gets all the players that near the given coordinates.
+     *
+     * @param coord the coordinates to be searched around
+     *
+     * @param validDistance what's considered "near"
+     *
+     * @return a list of all the players that are within validDistance from
+     *         the coordinates. An empty list is returned when no player is
+     *         near the coordinates. Note that this method does not care about
+     *         the visibility of the players.
+     *
+     * @see visiblePlayerNear
+     */
+    public ArrayList<Player> playersNear(Coordinates coord,
+            double validDistance) {
+        ArrayList<Player> players = new ArrayList<Player>();
+        for (Player p : getPlayers().values()) {
+            double distance = Util.distance(p.coord, coord);
+            if (distance <= validDistance) {
+                players.add(p);
+            }
+        }
+
+        return players;
+    }
+
+    /**
      * Returns whether there *actually* is a food at a coordinate.
      *
      * Note that this method does not care about the visibility of the food.
@@ -257,6 +307,50 @@ public class WorldState {
         }
 
         return null;
+    }
+
+    /**
+     * Returns one of the food that are near the given player.
+     *
+     * @param player the player to be searched around
+     *
+     * @param validDistance what's considered "near"
+     *
+     * @return one of the food that's eatable by and near the player. null if
+     *         there is no such food.
+     */
+    public Food eatableFoodNear(Player player, double validDistance) {
+        for (Food f : foodsNear(player.coord, validDistance)) {
+            if (player.canEat(f)) {
+                return f;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns all the food near the given coordinates.
+     *
+     * Note that this method does not care about the visibility of the food.
+     *
+     * @param coord the coordinates to be checked around
+     *
+     * @param validDistance what's considered "near"
+     *
+     * @return the list of food that is near the given coordinates. An empty
+     *         list is returned if no such food.
+     */
+    public ArrayList<Food> foodsNear(Coordinates coord, double validDistance) {
+        ArrayList<Food> foods = new ArrayList<Food>();
+        for (Food f : getFoods().values()) {
+            double distance = Util.distance(f.coord, coord);
+            if (distance <= validDistance) {
+                foods.add(f);
+            }
+        }
+
+        return foods;
     }
 
     /**

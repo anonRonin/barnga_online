@@ -56,7 +56,8 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
      * Handles the player's move-related response on receiving data.
      */
     private void handlePlayer(Player player, Coordinates newCoord) {
-        Player otherPlayer = world.playerAt(newCoord);
+        Player otherPlayer =
+            world.visiblePlayerNear(player, Player.VALID_RANGE);
 
         // Someone's there
         if (otherPlayer != null) {
@@ -88,14 +89,10 @@ public class MoveListener implements DataListener<MessagePlayerCoord> {
      * Handles the food-related response on receiving player move.
      */
     private void handleFood(Player player, Coordinates newCoord) {
-        Food food = world.foodAt(newCoord);
+        Food food = world.eatableFoodNear(player, Player.VALID_RANGE);
 
-        // No food here!
+        // No food eatable
         if (food == null) {
-            return;
-        }
-
-        if (!configs.foodEatable(player, food)) {
             return;
         }
 
