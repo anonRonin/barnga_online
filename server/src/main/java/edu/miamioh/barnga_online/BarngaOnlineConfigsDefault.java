@@ -33,9 +33,10 @@ public class BarngaOnlineConfigsDefault implements BarngaOnlineConfigs {
         this.world = world;
         this.playerVisibility = new int[TEAM_NUMBER][TEAM_NUMBER];
         this.foodVisibility = new int[TEAM_NUMBER][TEAM_NUMBER];
+
+        initParams();
     }
 
-    @Override
     public void initParams() {
         world.setWorldSizeX(WORLD_X);
         world.setWorldSizeY(WORLD_Y);

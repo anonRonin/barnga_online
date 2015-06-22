@@ -14,7 +14,6 @@ public class PlayerTest extends TestCase {
 
         world = new WorldState();
         configs = new BarngaOnlineConfigsDefault(world);
-        configs.initParams();
     }
 
     public static Test suite() {

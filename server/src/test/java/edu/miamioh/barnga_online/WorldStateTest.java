@@ -15,7 +15,6 @@ public class WorldStateTest extends TestCase {
 
         world = new WorldState();
         configs = new BarngaOnlineConfigsDefault(world);
-        configs.initParams();
 
         Coordinates coord = new Coordinates(0, 0);
         p = new Player(1, 0, coord, configs);

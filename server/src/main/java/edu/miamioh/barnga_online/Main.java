@@ -30,8 +30,6 @@ public class Main {
         // Game setup
         WorldState world = new WorldState();
         BarngaOnlineConfigsDefault barngaConfigs = new BarngaOnlineConfigsDefault(world);
-        // TODO: Don't need this? Just constructor?
-        barngaConfigs.initParams();
 
         // Event Listeners
         server.addConnectListener(

@@ -10,12 +10,6 @@ import java.util.HashSet;
  */
 public interface BarngaOnlineConfigs {
     /**
-     * Sets the initial parameters such as the world size, view size, and
-     * visibility table.
-     */
-    public void initParams();
-
-    /**
      * Sets the initial coordinate of the player.
      *
      * @param playerId the player that needs a new place to start

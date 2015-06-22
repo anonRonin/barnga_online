@@ -13,7 +13,6 @@ public class FoodTest extends TestCase {
 
     public FoodTest(String testName) {
         super(testName);
-        configs.initParams();
     }
 
     public static Test suite() {

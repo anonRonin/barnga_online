@@ -11,7 +11,6 @@ public class TeamTest extends TestCase {
 
     public TeamTest(String testName) {
         super(testName);
-        configs.initParams();
     }
 
     public static Test suite() {
