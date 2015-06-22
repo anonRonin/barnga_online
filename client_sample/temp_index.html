@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+  </head>
+
+  <body style="overflow: hidden">
+
+    <div class = "scoreboard">
+
+      <div class = "red_team"></div>
+      <div class = "yellow_team"></div>
+      <div class = "green_team"></div>
+      <div class = "blue_team"></div>
+
+      <div class = "red_label" id = "0"></div>
+      <div class = "yellow_label" id = "1"></div>
+      <div class = "green_label" id = "2"></div>
+      <div class = "blue_label" id = "3" ></div>
+
+    </div>
+
+    <canvas id = "gameCanvas"></canvas>
+    <script src = "/socket.io/socket.io.js"></script>
+    <script src = "game.js"></script>
+
+  </body>
+
+</html>
