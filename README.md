@@ -1,4 +1,4 @@
-ulturecode
+#Culturecode
 ## Description
 This game is meant to simulate advantages and disadvantages of knowing certain
 information in a society or not. For example, when submersing yourself into a
